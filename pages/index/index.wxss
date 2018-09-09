@@ -1,0 +1,176 @@
+/* 顶部的样式 */
+.header {
+    background: #C62F2F;
+    display: flex;
+    justify-content: space-between;
+    height: 100rpx;
+    align-items: center;
+    padding: 0 20rpx;
+    box-sizing: border-box;
+}
+
+.header text {
+    color: white;
+    font-size: 40rpx;
+}
+
+.header .menu {}
+
+.header .mid-box {
+    display: flex;
+    align-items: center;
+}
+
+.header .mid-box text {}
+
+.header .mid-box text:nth-child(2) {
+    margin: 0 50rpx;
+}
+
+.header .search {}
+
+/* tab栏 */
+.tab-bar {
+    height: 60rpx;
+    display: flex;
+}
+
+.tab-bar .item.active {
+    border-bottom: 4rpx solid #C62F2F;
+    color: #C62F2F;
+}
+
+.tab-bar .item {
+    flex: 1;
+    font-size: 24rpx;
+    line-height: 60rpx;
+    text-align: center;
+}
+
+/* 轮播图 */
+swiper {
+    /* 根据图片量取的高度
+       目的是为了图片缩放不失真
+    */
+    height: 345rpx;
+}
+
+swiper image {
+    width: 100%;
+    /* 图片默认是有高度的 如果不是你要的那个需要人为的调整 */
+    height: 100%;
+}
+
+/* 个性推荐区域 */
+.personal {}
+
+.personal .info {
+    height: 200rpx;
+    display: flex;
+    justify-content: space-around;
+}
+
+.personal .info>view {
+    padding-top: 20rpx;
+    flex: 1;
+}
+
+.personal .info>view>text {
+    display: block;
+    text-align: center;
+    font-size: 24rpx;
+}
+
+.personal .info>view>text:nth-child(1) {
+    color: #C62F2F;
+    font-size: 60rpx;
+    border: 3rpx solid #C62F2F;
+    border-radius: 50%;
+    width: 100rpx;
+    height: 100rpx;
+    margin: 0 auto 10rpx;
+    text-align: center;
+    line-height: 100rpx;
+}
+
+/* 推荐歌单 */
+/* 标题 */
+.title{
+    padding:20rpx 0;
+    display: flex;
+    align-items: center;
+}
+.title text:first-child{
+    font-size:32rpx;
+    border-left: 8rpx solid #C62F2F;
+    padding-left: 20rpx;
+}
+.title text:last-child{
+    color:hotpink;
+    font-size:40rpx;
+    font-weight: 700;
+}
+/* 歌单列表 */
+.section {
+    /* overflow: hidden; */
+    display: flex;
+    flex-wrap: wrap;
+}
+.section .music-item{
+    /* float: left; */
+    width: 250rpx;
+    position: relative;
+}
+.section .music-item view:first-child{
+    position: absolute;
+    top:4rpx;
+    right:8rpx;
+    color:white;
+    font-size:24rpx;
+}
+.section .music-item image{
+    width:248rpx;
+    height:248rpx;
+    display: block;
+    margin: 0 auto;
+}
+.section .music-item view:last-child{
+    font-size:24rpx;
+    /* overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis; */
+}
+
+/* 吸顶 */
+.header{
+    position: fixed;
+    width: 100%;
+    left: 0;
+    top: 0;
+    z-index: 998;
+}
+.tab-bar{
+    position: fixed;
+    width: 100%;
+    left: 0;
+    top:100rpx;
+    z-index: 998;
+    background: white;
+}
+page{
+    padding-top: 160rpx;
+}
+
+/* 底部的播放器 */
+.play-box{
+    position: fixed;
+    width: 100%;
+    left: 0;
+    bottom: 0;
+    background-color: #E1E1E1;
+    text-align: center;
+}
+.play-box audio{
+    display: block;
+    /* width: 100%; */
+}

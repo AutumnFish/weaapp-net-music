@@ -1,0 +1,67 @@
+<!-- 顶部的工具栏 -->
+<view class="header">
+    <!-- 页面跳转用代码来实现 -->
+    <text class="menu iconfont icon-menu"></text>
+    <view class="mid-box">
+        <text class="iconfont icon-music"></text>
+        <text class="iconfont icon-wangyiyunyinle"></text>
+        <text class="iconfont icon-pengyou"></text>
+    </view>
+    <text class="search iconfont icon-xiaoxi-"></text>
+</view>
+<!-- tab栏 -->
+<view class="tab-bar">
+    <view bindtap="changeTab" data-index="0" class="item {{index==0?'active':''}}">个性推荐</view>
+    <view bindtap="changeTab" data-index="1" class="item {{index==1?'active':''}}">歌单</view>
+    <view bindtap="changeTab" data-index="2" class="item {{index==2?'active':''}}">主播电台</view>
+    <view bindtap="changeTab" data-index="3" class="item {{index==3?'active':''}}">排行榜</view>
+</view>
+<!-- 内容区域 -->
+<view class="tab-content">
+    <!-- 个性推荐区域 -->
+    <view class="item personal" wx:if="{{index==0}}" >
+        <!-- 轮播图
+            事件绑定在祖先元素 子元素触发的事件 也是会冒泡上来的
+        -->
+        <swiper bindtap="getUrl" indicator-dots indicator-color="rgb(112, 80, 56)" autoplay interval="5000" indicator-active-color="#C62F2F" circular>
+            <!-- 保存当前这个轮播图的 targetId 方便我们获取信息 -->
+            <swiper-item  wx:for="{{banners}}" wx:key="{{item.targetId}}">
+                <image data-id="{{item.targetId}}"  src="{{item.picUrl}}"></image>
+            </swiper-item>
+        </swiper>
+        <!-- 信息 -->
+        <view class="info">
+            <view>
+                <text class="iconfont icon-fm"></text>
+                <text>私人FM</text>
+            </view>
+            <view>
+                <text class="iconfont icon-rili"></text>
+                <text>每日听歌推荐</text>
+            </view>
+            <view>
+                <text class="iconfont icon-paixing"></text>
+                <text>云音乐热歌榜</text>
+            </view>
+        </view>
+        <!-- 推荐歌单 -->
+        <view class="title">
+            <text>推荐歌单</text>
+            <text class="iconfont icon-arrow-right"></text>
+        </view>
+        <view class="section">
+            <view class="music-item" wx:for="{{result}}" wx:key="{{item.id}}">
+                <view class="ear-robot">🎧{{item.playCountZH}}</view>
+                <image src="{{item.picUrl}}"></image>
+                <view>{{item.name}}</view>
+            </view>
+        </view>
+    </view>
+    <view class="item" wx:if="{{index==1}}" >1</view>
+    <view class="item" wx:if="{{index==2}}" >2</view>
+    <view class="item" wx:if="{{index==3}}" >3</view>
+</view>
+<!-- 底部的播放器 -->
+<view class="play-box">
+    <audio wx:if="{{musicUrl!=''}}" src="{{musicUrl}}" poster="{{cover}}" name="{{songName}}" author="{{singer}}" autoplay controls></audio>
+</view>
