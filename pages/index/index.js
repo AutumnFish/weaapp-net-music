@@ -66,29 +66,43 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    // 获取轮播图数据
-    tool.thenAjax({
-      url: '/banner'
-    }).then(backData => {
-      // console.log(backData)
-      this.setData({
-        banners: backData.data.banners
+    wx.showNavigationBarLoading();
+      // 获取轮播图数据
+      tool.thenAjax({
+        url: '/banner'
+      }).catch(info=>{
+        console.log(info);
+        // 关闭loading
+        wx.hideNavigationBarLoading();
+        // 提示用户
+        wx.showToast({
+          title: '数据获取失败',
+          icon: 'none',
+          duration: 1500,
+          mask: false,
+        });
+      }).then(backData => {
+        // console.log(backData)
+        this.setData({
+          banners: backData.data.banners
+        })
+        // 轮播图获取到了之后再去获取 推荐歌单
+        return tool.thenAjax({
+          url: "/personalized"
+        })
+      }).then(backData => {
+        // 推荐歌单的数据
+        // 默认没有万
+        backData.data.result.forEach(v => {
+          let num = parseInt(v.playCount / 10000);
+          v.playCountZH = num >= 1 ? (num + '万') : parseInt(v.playCount);
+        })
+        this.setData({
+          result: backData.data.result
+        })
+        // 关闭loading
+        wx.hideNavigationBarLoading();
       })
-      // 轮播图获取到了之后再去获取 推荐歌单
-      return tool.thenAjax({
-        url: "/personalized"
-      })
-    }).then(backData => {
-      // 推荐歌单的数据
-      // 默认没有万
-      backData.data.result.forEach(v => {
-        let num = parseInt(v.playCount / 10000);
-        v.playCountZH = num >= 1 ? (num + '万') : parseInt(v.playCount);
-      })
-      this.setData({
-        result: backData.data.result
-      })
-    })
   },
 
   /**
@@ -101,9 +115,7 @@ Page({
   /**
    * 生命周期函数--监听页面显示
    */
-  onShow: function () {
-
-  },
+  onShow: function () {},
 
   /**
    * 生命周期函数--监听页面隐藏
